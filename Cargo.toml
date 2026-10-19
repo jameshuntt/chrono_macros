@@ -1,11 +1,32 @@
 [package]
 name = "chrono_macros"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+rust-version = "1.85"
+
+license = "MIT OR Apache-2.0"
+description = "Macros for strongly typed chrono wrappers (a UTC timestamp or a duration per kind), with helpers for expiry, deadlines and durations"
+keywords = ["chrono", "datetime", "duration", "newtype", "macro"]
+categories = ["date-and-time", "rust-patterns"]
+
+authors = ["James Hunt <james@1o.business>"]
+repository = "https://github.com/jameshuntt/chrono_macros"
+readme = "README.md"
+
+include = ["src/**", "Cargo.toml", "LICENSE*", "README*", "CHANGELOG*"]
 
 [features]
 default = []
-serde = ["chrono/serde"]
+# Serialize and Deserialize for the types `typed_datetime!` and `typed_duration!` declare (chrono's own serde forms).
+serde = ["dep:serde", "chrono/serde"]
+# `helpers::UserId` (a `uuid_macros::typed_uuid!` id) and `helpers::User`.
+uuid = ["dep:uuid_macros"]
 
 [dependencies]
-chrono = { workspace = true }
+# 0.4.41: the oldest release the test suite is run against (its `TimeDelta` has serde impls)
+chrono = "0.4.41"
+serde = { version = "1.0.219", optional = true }
+uuid_macros = { version = "0.1.0", optional = true }
+
+[dev-dependencies]
+serde_json = "1"

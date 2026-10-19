@@ -1,8 +1,0 @@
-[package]
-name = "chrono_helpers"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-chrono_macros = { path = "../chrono_macros" }
-uuid_macros = { path = "../uuid_macros" }
